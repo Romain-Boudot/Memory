@@ -7,20 +7,16 @@
 
     <div
       v-if="!card.noCard"
-      :class="['face', 'card', card.isBlack ? 'black' : 'red', card.lookingAt || shown ? 'lookingAt' : 'hide']"
+      :class="['face', 'card', card.isBlack ? 'black' : 'red', (card.player && card.player.isMe && card.lookingAt) || shown ? 'lookingAt' : 'hide']"
       :content="`${card.lookingAt || shown ? card.colorSymbol : ''}`"
     >
-      <span v-if="card.lookingAt || shown">
-        {{
-          card.isAs
-            ? 'A'
-            : card.number[0]
-        }}
+      <span v-if="(card.player && card.player.isMe && card.lookingAt) || shown">
+        {{ card }}
       </span>
     </div>
 
     <div
-      :class="['back', card.lookingAt || shown ? 'lookingAt' : 'hide']"
+      :class="['back', (card.player && card.player.isMe && card.lookingAt) || shown ? 'lookingAt' : 'hide']"
     >
       <span>
         ∮

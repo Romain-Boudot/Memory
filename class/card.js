@@ -46,7 +46,7 @@ export class Card {
   }
 
   get isInHand () {
-    return !!this.player && this.player.isMe
+    return !!this.player
   }
 
   constructor (color, number, player, noCard = false) {
@@ -58,7 +58,7 @@ export class Card {
   }
 
   canLookAt () {
-    return !this.lookingAt && !this.lookedAt && !(!this.isInHand || !this.player.canLookAt())
+    return !this.lookingAt && !this.lookedAt && this.isInHand && this.player.canLookAt()
   }
 
   lookAt (bypassLookAtCount = false) {
@@ -73,6 +73,12 @@ export class Card {
 
   hide () {
     this.lookingAt = false
+  }
+
+  toString () {
+    return this.isAs
+      ? 'A'
+      : this.isFace ? this.number[0] : this.number
   }
 
   getPoint () {

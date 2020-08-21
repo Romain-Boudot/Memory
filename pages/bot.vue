@@ -6,6 +6,7 @@
         v-for="card in bot.hand"
         :key="card.id"
         :card="card"
+        :shown="false"
       />
     </div>
     <div class="board">
